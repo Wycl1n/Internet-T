@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <main id="main">
+            <input type="text" id="first">
+            <input type="text" id="second">
+            <button onclick="CreateTable()">CreateTable</button>
+            <div id="result"></div>
+
+            <script>
+                function CreateTable() {
+                    let min = 0;
+                    let max = 0;
+
+                    if(parseInt(document.getElementById("first").value) > parseInt(document.getElementById("second").value)) {
+                        min = parseInt(document.getElementById("second").value);
+                        max = parseInt(document.getElementById("first").value);
+                    }
+                    else {
+                        max = parseInt(document.getElementById("second").value);
+                        min = parseInt(document.getElementById("first").value);
+                    }
+
+                    let arr = [[],[],[],[],[],[],[],[],[],[]];
+                    
+                    for(let i = 0; i < 10; i++)
+                        for(let j = 0; j < 10; j++)
+                            arr[i].push(Math.floor(Math.random() * (max-min + 1) + min));
+
+                    var tbl = document.createElement("table");
+                    var tblBody = document.createElement("tbody");
+
+                    for (var i = 0; i < 10; i++) {
+                        var row = document.createElement("tr");
+
+                        for (var j = 0; j < 10; j++) {
+                            var cell = document.createElement("td");
+                            var cellText = document.createTextNode(arr[i][j]);
+
+                            cell.appendChild(cellText);
+                            if((i + j) % 2 === 1) {
+                                cell.style.backgroundColor = 'brown'
+                                cell.style.color = 'white'
+                            }
+                            row.appendChild(cell);
+                        }
+
+                        tblBody.appendChild(row);
+                    }
+
+                    tbl.appendChild(tblBody);
+                    document.getElementById("main").appendChild(tbl);
+                    tbl.setAttribute("border", "2");
+                }
+            </script>
+        </main>
+    </body>
+</html>
